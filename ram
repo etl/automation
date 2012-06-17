@@ -1,9 +1,8 @@
 #!/bin/sh
-# 
-# credits
-# etl.std@gmail.com
-
-
+# Serge: etl.std@gmail.com
+#
+# Easy ram disk management in OSX
+# Ram disks are pretty fly!
 
 MPATH="/private/tmp/ram"
 
