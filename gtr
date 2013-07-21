@@ -1,0 +1,40 @@
+#!/bin/sh
+exec scala "$0" "$@"
+!#
+
+/**
+ * Sergey
+ * etl.std@gmail.com
+ */
+
+import java.net.URLEncoder
+import scala.sys.process._
+
+val serviceUri = "http://translate.google.com/translate_a/t?client=t&hl=en&sl=%s&tl=%s&ie=UTF-8&oe=UTF-8&q=%s"
+val pageUri = "http://translate.google.com/#%s/%s/%s"
+
+def detectLangPair(text: String): (String, String) = {
+  for (c <- text) {
+		if (('А' to 'Я').contains(c.toUpper)) {
+			return ("ru", "en")
+		}
+	}
+	("en", "ru")
+}
+
+def translate(text: String) = {
+	val pair: (String, String) = detectLangPair(text)
+	 val uri: String = pageUri.format(pair._1, pair._2, URLEncoder.encode(text, "UTF-8"))
+	Seq("open", uri).!
+}
+
+
+var a = args.mkString(" ")
+
+while (a.isEmpty) {
+	println("Enter text:\n")
+	a = readLine()
+}
+
+translate(a)
+
