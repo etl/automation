@@ -14,7 +14,7 @@ val serviceUri = "http://translate.google.com/translate_a/t?client=t&hl=en&sl=%s
 val pageUri = "http://translate.google.com/#%s/%s/%s"
 
 def detectLangPair(text: String): (String, String) = {
-  for (c <- text) {
+	for (c <- text) {
 		if (('А' to 'Я').contains(c.toUpper)) {
 			return ("ru", "en")
 		}
